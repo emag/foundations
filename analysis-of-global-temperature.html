@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Analysis of global temperature</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+<textarea id="source">
+
+background-image: url(img/fp-tower/website-background.svg)
+
+class: center, middle, white
+
+.title[Analysis of global temperature]
+
+---
+background-image: url(img/foundation/parlist-1a.svg)
+
+# Data processing
+
+---
+background-image: url(img/foundation/parlist-1b.svg)
+
+# Sequential iteration
+
+---
+background-image: url(img/foundation/parlist-1c.svg)
+
+# Sequential iteration
+
+---
+background-image: url(img/foundation/parlist-1d.svg)
+
+# Sequential iteration
+
+---
+background-image: url(img/foundation/parlist-2a.svg)
+
+# Parallel iteration
+
+---
+background-image: url(img/foundation/parlist-2b.svg)
+
+# Parallel iteration
+
+---
+background-image: url(img/foundation/parlist-2c.svg)
+
+# Parallel iteration
+
+---
+background-image: url(img/foundation/parlist-2d.svg)
+
+# Parallel iteration
+
+---
+background-image: url(img/foundation/parlist-3.svg)
+
+# Parallel iteration
+
+---
+# Important points
+
+.forty-seven-left[
+## 1. Size the partitions appropriately
+]
+
+.forty-seven-right[
+<img src="img/foundation/size-jobs.svg" alt="Find the right size for the job" style="width:400px;"/>
+]
+
+
+---
+# Important points
+
+<br>
+
+## 1. Size the partitions appropriately
+
+## 2. Benchmark and configure
+
+--
+
+## 3. Parallel process leads to the same result as the sequential one
+
+---
+background-image: url(img/fp-tower/website-background-white.svg)
+
+class: middle, white
+
+# TemperatureNotebook.scala
+
+---
+background-image: url(img/foundation/parlist-foldleft-1.svg)
+
+# foldLeft
+
+---
+background-image: url(img/foundation/parlist-foldleft-2a.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-2b.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-2c.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-2d.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-2e.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-2f.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-2g.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-2h.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-2i.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-3a.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-3b.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-3c.svg)
+
+# foldLeft per partition
+
+---
+background-image: url(img/foundation/parlist-foldleft-4.svg)
+
+# All partitions folded
+
+---
+background-image: url(img/foundation/parlist-foldleft-5a.svg)
+
+# foldLeft intermediate results
+
+---
+background-image: url(img/foundation/parlist-foldleft-5b.svg)
+
+# foldLeft intermediate results
+
+---
+background-image: url(img/foundation/parlist-foldleft-5c.svg)
+
+# foldLeft intermediate results
+
+---
+background-image: url(img/foundation/parlist-foldleft-5d.svg)
+
+# foldLeft intermediate results
+
+---
+background-image: url(img/foundation/parlist-foldleft-5e.svg)
+
+# foldLeft intermediate results
+
+---
+background-image: url(img/foundation/parlist-foldleft-5f.svg)
+
+# foldLeft intermediate results
+
+---
+background-image: url(img/foundation/parlist-foldleft-6.svg)
+
+# foldLeft
+
+---
+background-image: url(img/fp-tower/website-background-white.svg)
+
+class: middle, white
+
+# TemperatureExercises.scala
+
+---
+# monoFoldLeft use n + 1 default value
+
+.sixty-two-left[
+<img src="img/foundation/parlist-monofoldleft-default.svg" alt="foldLeft per partition" style="width:600px;"/>
+]
+
+.thirty-two-right[
+<img src="img/foundation/parlist-foldleft-5a.svg" alt="foldLeft per partition" style="width:105px;"/>
+]
+
+---
+# monoFoldLeft requires combine to be associative
+
+.fifty-two-left[
+<img src="img/foundation/parlist-monofoldleft-associative-1.svg" alt="foldLeft per partition" style="width:420px;"/>
+]
+
+.forty-seven-right[
+<br><br><br>
+```scala
+(a1 combine a2 combine a3)
+(b1 combine b2 combine b3)
+```
+]
+
+
+---
+# monoFoldLeft requires combine to be associative
+
+.fifty-two-left[
+<img src="img/foundation/parlist-monofoldleft-associative-2.svg" alt="foldLeft per partition" style="width:420px;"/>
+]
+
+.forty-seven-right[
+<br><br><br>
+```scala
+(a1 combine a2 combine a3) combine
+(b1 combine b2 combine b3)
+```
+]
+
+---
+# monoFoldLeft requires combine to be associative
+
+.fifty-two-left[
+<img src="img/foundation/parlist-monofoldleft-associative-3.svg" alt="foldLeft per partition" style="width:420px;"/>
+]
+
+.forty-seven-right[
+<br><br>
+```scala
+(a combine b combine c) combine
+(d combine e combine f)
+```
+<br><br>
+```scala
+                 ==
+```
+<br>
+
+```scala
+(a combine b combine c combine d) combine
+(e combine f)
+```
+]
+
+</textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>
+    var slideshow = remark.create({
+        ratio: "16:9",
+        slideNumberFormat: ''
+    });
+</script>
+</body>
+</html>
